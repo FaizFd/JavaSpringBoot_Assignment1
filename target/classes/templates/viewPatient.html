@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Patient</title>
+</head>
+<body>
+<h1>Patient Details</h1>
+
+<!-- If the patient is found, display details -->
+<div th:if="${patient != null}">
+    <p><strong>ID:</strong> <span th:text="${patient.id}"></span></p>
+    <p><strong>Name:</strong> <span th:text="${patient.name}"></span></p>
+    <p><strong>Age:</strong> <span th:text="${patient.age}"></span></p>
+    <p><strong>Gender:</strong> <span th:text="${patient.gender}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${patient.email}"></span></p>
+    <p><strong>City:</strong> <span th:text="${patient.city}"></span></p>
+    <p><strong>Date of Birth:</strong> <span th:text="${patient.dateOfBirth}"></span></p>
+</div>
+
+<!-- If patient is not found, show an error message -->
+<div th:if="${patient == null}">
+    <p>Patient not found.</p>
+</div>
+
+<a href="/patients">Back to Patients List</a>
+</body>
+</html>
