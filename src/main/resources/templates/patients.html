@@ -6,11 +6,13 @@
 <body>
 <h1>Patients List</h1>
 
-<form action="/patients/view" method="get">
-    <label for="id">Search Patient by ID:</label>
-    <input type="text" id="id" name="id" placeholder="Enter Patient ID" required>
-    <button type="submit">View</button>
+<form action="/patients/search" method="get">
+    <label for="name">Search Patient by Name:</label>
+    <input type="text" id="name" name="name" placeholder="Enter Patient Name" required>
+    <button type="submit">Search</button>
 </form>
+
+
 <table>
     <thead>
     <tr>
@@ -40,6 +42,7 @@
     </tr>
     </tbody>
 </table>
+
 <a href="/patients/add">Add New Patient</a>
 </body>
 </html>

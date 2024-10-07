@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Matching Patients</title>
+</head>
+<body>
+<h1>Matching Patients</h1>
+
+<!-- If multiple patients are found, display them in a list -->
+<div th:if="${patients != null}">
+    <ul>
+        <li th:each="patient : ${patients}">
+            <a th:href="@{/patients/{id}(id=${patient.id})}" th:text="${patient.name}"></a>
+        </li>
+    </ul>
+</div>
+
+<!-- If no patients found, show an error message -->
+<div th:if="${errorMessage != null}">
+    <p th:text="${errorMessage}"></p>
+</div>
+
+<a href="/patients">Back to Patients List</a>
+</body>
+</html>

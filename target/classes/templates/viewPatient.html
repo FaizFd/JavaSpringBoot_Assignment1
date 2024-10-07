@@ -6,7 +6,17 @@
 <body>
 <h1>Patient Details</h1>
 
-<!-- If the patient is found, display details -->
+<!-- For viewing a list of matching patients -->
+<div th:if="${patients != null and patients.size() > 1}">
+    <h2>Matching Patients:</h2>
+    <ul>
+        <li th:each="patient : ${patients}">
+            <a th:href="@{/patients/view/{id}(id=${patient.id})}" th:text="${patient.name}">Patient Name</a>
+        </li>
+    </ul>
+</div>
+
+<!-- For viewing a single patient -->
 <div th:if="${patient != null}">
     <p><strong>ID:</strong> <span th:text="${patient.id}"></span></p>
     <p><strong>Name:</strong> <span th:text="${patient.name}"></span></p>
@@ -17,7 +27,7 @@
     <p><strong>Date of Birth:</strong> <span th:text="${patient.dateOfBirth}"></span></p>
 </div>
 
-<!-- If patient is not found, show an error message -->
+<!-- If no patient is found -->
 <div th:if="${patient == null}">
     <p>Patient not found.</p>
 </div>

@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/patients")
 public class PatientController {
@@ -68,4 +71,32 @@ public class PatientController {
         model.addAttribute("patient", patient);
         return "viewPatient"; // Thymeleaf template name
     }
+
+    @GetMapping("/search")
+    public String searchPatientByName(@RequestParam("name") String name, Model model) {
+        List<Patient> patients = patientService.getPatientsByName(name);
+        model.addAttribute("patients", patients);
+        if (patients.isEmpty()) {
+            model.addAttribute("errorMessage", "No patients found with name containing: " + name);
+            return "viewPatient"; // Show error message
+        } else if (patients.size() == 1) {
+            return "redirect:/patients/" + patients.get(0).getId();  // If only one match, go to details directly
+        }
+        return "listPatients"; // Show a list of matching patients
+    }
+
+    @GetMapping("/view/{id}")
+    public String viewPatientById(@PathVariable Long id, Model model) {
+        List<Patient> patients = new ArrayList<>();
+        Patient patient = patientService.getPatientById(id);
+
+        if (patient != null) {
+            patients.add(patient);
+        }
+
+        model.addAttribute("patients", patients);
+        return "viewPatient";
+    }
+
+
 }
